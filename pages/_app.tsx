@@ -1,6 +1,7 @@
 import App from 'next/app'
 import Head from 'next/head'
 import { AuthContextProvider } from '~components/stores/AuthContext'
+import { WorkflowContextProvider } from '~components/stores/WorkflowContext'
 
 const THEME = process.env.BOOTSWATCH_THEME || 'sketchy'
 
@@ -30,7 +31,9 @@ export default class CustomApp extends App {
           <link rel="stylesheet" href="/static/css/custom.css"/>
         </Head>
         <AuthContextProvider>
-          <Component {...pageProps} />
+          <WorkflowContextProvider>
+            <Component {...pageProps} />
+          </WorkflowContextProvider>
         </AuthContextProvider>
       </>
     )

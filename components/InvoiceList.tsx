@@ -1,10 +1,10 @@
 import { Table } from 'react-bootstrap'
 import { Invoice } from 'xero-node/lib/AccountingAPI-models'
 import { formatAspNetDate } from '~lib/helpers/dates'
+import useWorkflow from '~lib/hooks/use-workflow'
 
 interface IProps {
   invoices: Invoice[]
-  onSelect?: (invoice: Invoice) => void
 }
 
 /**
@@ -15,14 +15,10 @@ interface IProps {
  * @returns
  */
 export default function InvoiceList (props: IProps) {
+  const { selectInvoice } = useWorkflow()
+
   if (!props.invoices || !props.invoices.length) {
     return <p>No invoices</p>
-  }
-
-  const onSelect = (invoice: Invoice) => () => {
-    if (props.onSelect !== null) {
-      props.onSelect(invoice)
-    }
   }
 
   return (
@@ -37,7 +33,7 @@ export default function InvoiceList (props: IProps) {
       </thead>
       <tbody>
         {props.invoices.map(invoice => (
-          <tr key={invoice.InvoiceID} style={{ cursor: 'pointer' }} onClick={onSelect(invoice)}>
+          <tr key={invoice.InvoiceID} style={{ cursor: 'pointer' }} onClick={() => selectInvoice(invoice)}>
             <td>{formatAspNetDate(invoice.DueDate)}</td>
             <td>{invoice.Contact.Name}</td>
             <td>{invoice.InvoiceNumber}</td>

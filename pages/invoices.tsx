@@ -1,7 +1,6 @@
 import 'isomorphic-fetch'
 
 import { NextPageContext } from 'next-server/dist/lib/utils'
-import { useState } from 'react'
 import { Col, Row } from 'react-bootstrap'
 import { Invoice } from 'xero-node/lib/AccountingAPI-models'
 import InvoiceList from '~components/InvoiceList'
@@ -21,28 +20,16 @@ interface IPageProps {
  * @returns
  */
 export default function InvoicesPage (props: IPageProps) {
-  const [selectedInvoice, setSelectedInvoice] = useState<Invoice>(null)
-
   return (
     <DefaultLayout>
       <PageHeader title="Outstanding Balances" />
       <Row>
         <Col md={8} sm={12}>
-          <InvoiceList
-            invoices={props.invoices}
-            onSelect={(invoice: Invoice) => {
-              setSelectedInvoice(invoice)
-            }}
-          />
+          <InvoiceList invoices={props.invoices} />
         </Col>
-        {selectedInvoice && (
-          <Col md={4}>
-            <SelectedInvoice
-              invoice={selectedInvoice}
-              onCancel={() => setSelectedInvoice(null)}
-            />
-          </Col>
-        )}
+        <Col md={4}>
+          <SelectedInvoice />
+        </Col>
       </Row>
     </DefaultLayout>
   )

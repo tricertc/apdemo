@@ -1,11 +1,6 @@
 import { Button, Card, Table } from 'react-bootstrap'
-import { Invoice } from 'xero-node/lib/AccountingAPI-models'
 import { formatAspNetDate } from '~lib/helpers/dates'
-
-interface IProps {
-  invoice: Invoice
-  onCancel: () => void
-}
+import useWorkflow from '~lib/hooks/use-workflow'
 
 /**
  * The selected invoice widget for the invoices page.
@@ -14,8 +9,13 @@ interface IProps {
  * @param {IProps} props
  * @returns
  */
-export default function SelectedInvoice (props: IProps) {
-  const { invoice } = props
+export default function SelectedInvoice () {
+  const { state, deselectInvoice } = useWorkflow()
+  const invoice = state.selectedInvoice
+
+  if (!invoice) {
+    return null
+  }
 
   return (
     <Card>
@@ -43,7 +43,7 @@ export default function SelectedInvoice (props: IProps) {
         </Table>
       </Card.Body>
       <Card.Footer className="text-right">
-        <Button variant="secondary" onClick={() => props.onCancel()}>
+        <Button variant="secondary" onClick={deselectInvoice}>
           Cancel
         </Button>{' '}
         <Button variant="primary">
