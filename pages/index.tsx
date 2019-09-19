@@ -1,5 +1,6 @@
 import { Button, Container, Jumbotron } from 'react-bootstrap'
 import BaseLayout from '~components/layouts/BaseLayout'
+import useAuth from '~lib/hooks/use-auth'
 
 /**
  * The home page.
@@ -8,6 +9,8 @@ import BaseLayout from '~components/layouts/BaseLayout'
  * @returns
  */
 export default function IndexPage () {
+  const { connect } = useAuth()
+
   return (
     <BaseLayout>
       <Container>
@@ -23,7 +26,9 @@ export default function IndexPage () {
             <li>Print your own checks</li>
           </ul>
           <div className="pt-3">
-            <Button>Connect to Xero</Button>
+            <Button variant="primary" size="lg" onClick={connect}>
+              Conect to Xero
+            </Button>
           </div>
         </Jumbotron>
       </Container>

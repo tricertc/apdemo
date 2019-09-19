@@ -19,7 +19,10 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
-      "~components/*": ["./components/*"]
+      "~common/*": ["./common/*"],
+      "~components/*": ["./components/*"],
+      "~lib/*": ["./lib/*"],
+      "~server/*": ["./server/*"]
     }
   },
   "exclude": [

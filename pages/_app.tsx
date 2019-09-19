@@ -1,10 +1,11 @@
 import App from 'next/app'
 import Head from 'next/head'
+import { AuthContextProvider } from '~components/stores/AuthContext'
 
 const THEME = process.env.BOOTSWATCH_THEME || 'sketchy'
 
 /**
- * Adds global stylesheet to all pages.
+ * Adds global stylesheet and context providers to all pages.
  *
  * @export
  * @class CustomApp
@@ -27,7 +28,9 @@ export default class CustomApp extends App {
             href={`https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.3.1/${THEME}/bootstrap.min.css`}
           />
         </Head>
-        <Component {...pageProps} />
+        <AuthContextProvider>
+          <Component {...pageProps} />
+        </AuthContextProvider>
       </>
     )
   }
