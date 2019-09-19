@@ -1,12 +1,14 @@
 import 'isomorphic-fetch'
 
 import { NextPageContext } from 'next-server/dist/lib/utils'
-import { Card, Col, Row } from 'react-bootstrap'
+import { useState } from 'react'
+import { Col, Row } from 'react-bootstrap'
 import { Invoice } from 'xero-node/lib/AccountingAPI-models'
 import InvoiceList from '~components/InvoiceList'
 import DefaultLayout from '~components/layouts/DefaultLayout'
 import PageHeader from '~components/PageHeader'
-import { getAbsoluteUrl, handleErrors } from '~lib/helpers'
+import SelectedInvoice from '~components/SelectedInvoice'
+import { getAbsoluteUrl } from '~lib/helpers'
 
 interface IPageProps {
   invoices: Invoice[]
@@ -19,13 +21,28 @@ interface IPageProps {
  * @returns
  */
 export default function InvoicesPage (props: IPageProps) {
+  const [selectedInvoice, setSelectedInvoice] = useState<Invoice>(null)
+
   return (
     <DefaultLayout>
       <PageHeader title="Outstanding Balances" />
       <Row>
-        <Col md={10} sm={12}>
-          <InvoiceList invoices={props.invoices} />
+        <Col md={8} sm={12}>
+          <InvoiceList
+            invoices={props.invoices}
+            onSelect={(invoice: Invoice) => {
+              setSelectedInvoice(invoice)
+            }}
+          />
         </Col>
+        {selectedInvoice && (
+          <Col md={4}>
+            <SelectedInvoice
+              invoice={selectedInvoice}
+              onCancel={() => setSelectedInvoice(null)}
+            />
+          </Col>
+        )}
       </Row>
     </DefaultLayout>
   )

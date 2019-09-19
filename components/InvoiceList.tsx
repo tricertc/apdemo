@@ -4,6 +4,7 @@ import { formatAspNetDate } from '~lib/helpers/dates'
 
 interface IProps {
   invoices: Invoice[]
+  onSelect?: (invoice: Invoice) => void
 }
 
 /**
@@ -18,8 +19,14 @@ export default function InvoiceList (props: IProps) {
     return <p>No invoices</p>
   }
 
+  const onSelect = (invoice: Invoice) => () => {
+    if (props.onSelect !== null) {
+      props.onSelect(invoice)
+    }
+  }
+
   return (
-    <Table striped hover>
+    <Table striped hover bordered>
       <thead>
         <tr>
           <th>Due</th>
@@ -30,7 +37,7 @@ export default function InvoiceList (props: IProps) {
       </thead>
       <tbody>
         {props.invoices.map(invoice => (
-          <tr key={invoice.InvoiceID} style={{ cursor: 'pointer' }}>
+          <tr key={invoice.InvoiceID} style={{ cursor: 'pointer' }} onClick={onSelect(invoice)}>
             <td>{formatAspNetDate(invoice.DueDate)}</td>
             <td>{invoice.Contact.Name}</td>
             <td>{invoice.InvoiceNumber}</td>
