@@ -35,10 +35,15 @@ export default function reducer (state: IAuthState, action: AuthAction): IAuthSt
     case 'connect':
       nextState.accessToken = null
       nextState.requestToken = action.requestToken
+      nextState.error = null
       break
 
     case 'error':
       nextState.error = action.message
+      break
+
+    case 'login':
+      nextState.accessToken = action.accessToken
       break
 
     case 'logout':

@@ -27,6 +27,7 @@ export default class CustomApp extends App {
             rel="stylesheet"
             href={`https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.3.1/${THEME}/bootstrap.min.css`}
           />
+          <link rel="stylesheet" href="/static/css/custom.css"/>
         </Head>
         <AuthContextProvider>
           <Component {...pageProps} />

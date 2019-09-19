@@ -12,8 +12,10 @@ import Navigation from '~components/Navigation'
 export default function DefaultLayout (props: IBaseLayoutProps) {
   return (
     <BaseLayout title={props.title}>
-      <Navigation />
-      <Container className="p-3">
+      <div className="mb-3">
+        <Navigation />
+      </div>
+      <Container>
         {props.children}
       </Container>
     </BaseLayout>

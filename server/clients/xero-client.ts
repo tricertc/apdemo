@@ -1,5 +1,6 @@
 import { AccountingAPIClient } from 'xero-node'
 import { XeroClientConfiguration } from 'xero-node/lib/internals/BaseAPIClient'
+import { AccessToken } from 'xero-node/lib/internals/OAuth1HttpClient'
 
 const config: XeroClientConfiguration = {
   appType: 'public',
@@ -16,4 +17,15 @@ const config: XeroClientConfiguration = {
  */
 export function getAnonymousClient (): AccountingAPIClient {
   return new AccountingAPIClient(config)
+}
+
+/**
+ * Get an authenticated client.
+ *
+ * @export
+ * @param {AccessToken} accessToken
+ * @returns {AccountingAPIClient}
+ */
+export function getAuthenticatedClient (accessToken: AccessToken): AccountingAPIClient {
+  return new AccountingAPIClient(config, accessToken)
 }
