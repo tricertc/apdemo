@@ -1,5 +1,6 @@
 import Link from 'next/link'
-import { Nav, Navbar, NavDropdown } from 'react-bootstrap'
+import { useEffect, useState } from 'react'
+import { Nav, Navbar } from 'react-bootstrap'
 import useAuth from '~lib/hooks/use-auth'
 
 interface INavLinkProps {
@@ -8,8 +9,12 @@ interface INavLinkProps {
 }
 
 const NavLink = (props: INavLinkProps) => {
-  // const active = window && props.href.startsWith(window.location.pathname)
-  const active = true
+  const[active, setActive] = useState<boolean>(false)
+
+  useEffect(() => {
+    setActive(props.href.startsWith(window.location.pathname))
+  }, [])
+
   return (
     <Link href={props.href}>
       <a className={active ? 'nav-link active' : 'nav-link'}>
@@ -37,6 +42,7 @@ export default function Navigation () {
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
           <NavLink href="/dashboard" title="Dashboard" />
+          <NavLink href="/invoices" title="Invoices" />
           <a href="#" className="nav-link" onClick={logout}>
             Log out
           </a>
