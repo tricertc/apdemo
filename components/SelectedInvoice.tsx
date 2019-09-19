@@ -1,6 +1,7 @@
-import { Button, Card, Table } from 'react-bootstrap'
+import { Button, Card, Jumbotron, Table } from 'react-bootstrap'
 import { formatAspNetDate } from '~lib/helpers/dates'
 import useWorkflow from '~lib/hooks/use-workflow'
+import PaymentButton from './PaymentButton'
 
 /**
  * The selected invoice widget for the invoices page.
@@ -14,7 +15,11 @@ export default function SelectedInvoice () {
   const invoice = state.selectedInvoice
 
   if (!invoice) {
-    return null
+    return (
+      <Jumbotron className="text-center">
+        <h6>Select an invoice to pay</h6>
+      </Jumbotron>
+    )
   }
 
   return (
@@ -27,8 +32,8 @@ export default function SelectedInvoice () {
           <tbody>
             {invoice.InvoiceNumber && (
               <tr>
-                <th>Invoice No</th>
-                <td>{invoice.InvoiceNumber}</td>
+                <th>Invoice #</th>
+                <td><em>{invoice.InvoiceNumber}</em></td>
               </tr>
             )}
             <tr>
@@ -46,9 +51,7 @@ export default function SelectedInvoice () {
         <Button variant="secondary" onClick={deselectInvoice}>
           Cancel
         </Button>{' '}
-        <Button variant="primary">
-          Pay Invoice
-        </Button>
+        <PaymentButton />
       </Card.Footer>
     </Card>
   )

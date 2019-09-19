@@ -31,8 +31,6 @@ const NavLink = (props: INavLinkProps) => {
  * @returns
  */
 export default function Navigation () {
-  const { logout } = useAuth()
-
   return (
     <Navbar bg="primary" variant="dark" expand="lg">
       <Link href="/dashboard">
@@ -43,9 +41,7 @@ export default function Navigation () {
         <Nav className="mr-auto">
           <NavLink href="/dashboard" title="Dashboard" />
           <NavLink href="/invoices" title="Invoices" />
-          <a href="#" className="nav-link" onClick={logout}>
-            Log out
-          </a>
+          <NavLink href="/logout" title="Log out" />
         </Nav>
       </Navbar.Collapse>
     </Navbar>

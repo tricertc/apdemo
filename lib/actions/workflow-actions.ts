@@ -1,3 +1,5 @@
+import 'isomorphic-fetch'
+
 import { Dispatch } from 'react'
 import { Invoice } from 'xero-node/lib/AccountingAPI-models'
 import { IAction } from '~common/interfaces'
@@ -20,8 +22,12 @@ export type WorkflowAction = ISelectedInvoiceAction | IDeselectInvoiceAction
  * Set the selected invoice.
  */
 export const selectInvoice = (dispatch: Dispatch<ISelectedInvoiceAction>) =>
-  (invoice: Invoice) => {
-    dispatch({ type: 'selected_invoice', invoice })
+  (invoiceID: string) => {
+    fetch(`/api/invoices/${invoiceID}`)
+      .then<Invoice>(res => res.json())
+      .then(invoice => {
+        dispatch({ type: 'selected_invoice', invoice })
+      })
   }
 
 /**

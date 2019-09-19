@@ -33,7 +33,7 @@ export default function InvoiceList (props: IProps) {
       </thead>
       <tbody>
         {props.invoices.map(invoice => (
-          <tr key={invoice.InvoiceID} style={{ cursor: 'pointer' }} onClick={() => selectInvoice(invoice)}>
+          <tr key={invoice.InvoiceID} style={{ cursor: 'pointer' }} onClick={() => selectInvoice(invoice.InvoiceID)}>
             <td>{formatAspNetDate(invoice.DueDate)}</td>
             <td>{invoice.Contact.Name}</td>
             <td>{invoice.InvoiceNumber}</td>
