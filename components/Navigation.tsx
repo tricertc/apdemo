@@ -33,13 +33,12 @@ const NavLink = (props: INavLinkProps) => {
 export default function Navigation () {
   return (
     <Navbar bg="primary" variant="dark" expand="lg">
-      <Link href="/dashboard">
+      <Link href="/invoices">
         <a className="navbar-brand">AP Demo</a>
       </Link>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
-          <NavLink href="/dashboard" title="Dashboard" />
           <NavLink href="/invoices" title="Invoices" />
           <NavLink href="/checks" title="Checks" />
           <NavLink href="/logout" title="Log out" />

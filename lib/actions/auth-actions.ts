@@ -56,7 +56,7 @@ export const login = (dispatch: Dispatch<ILoginAction|IErrorAction>) =>
     .then<AccessToken>(res => res.json())
     .then(accessToken => {
       dispatch({ type: 'login', accessToken })
-      Router.replace('/dashboard')
+      Router.replace('/invoices')
     })
     .catch((err: Error) => {
       dispatch({ type: 'error', message: err.message })
