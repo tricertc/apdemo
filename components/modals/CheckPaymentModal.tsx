@@ -18,7 +18,7 @@ interface IFieldProps {
 const Field = (props: IFieldProps) => (
   <Form.Group>
     <Form.Label>{props.label}</Form.Label>
-    <Form.Control value={props.value} readOnly />
+    <Form.Control value={props.value} readOnly size="sm" />
   </Form.Group>
 )
 
@@ -65,7 +65,7 @@ export default function CheckPaymentModal (props: IProps) {
       <Modal.Body>
         <Form>
           <Row>
-            <Col md={7}>
+            <Col md={6}>
               <Form.Group>
                 <Form.Label>Select From Address</Form.Label>
                 <Form.Control
@@ -85,7 +85,7 @@ export default function CheckPaymentModal (props: IProps) {
               <Field label="Memo" value={invoice.InvoiceNumber} />
               <Field label="Date" value={moment.utc().format('MM/DD/YYYY')} />
             </Col>
-            <Col md={5}>
+            <Col md={6}>
               <Form.Group>
                 <Form.Label>Select Bank Account</Form.Label>
                 <Form.Control

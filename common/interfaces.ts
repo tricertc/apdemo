@@ -42,13 +42,22 @@ export interface ILoginRequest {
 }
 
 /**
- * LOB address record.
+ * Address record from LOB.
+ *
+ * @export
+ * @interface IAddress
  */
 export interface IAddress {
   id: string
   description: string
+  name: string
+  company: string
+  address_line1: string
+  address_line2?: string
+  address_city: string
+  address_state: string
+  address_zip: string
 }
-
 /**
  * LOB bank account.
  */
@@ -103,4 +112,42 @@ export interface ISendCheckRequest {
 export interface ISendCheckResponse {
   checkId: string
   checkNumber: string
+}
+
+interface IThumbnail {
+  small: string
+  medium: string
+  large: string
+}
+
+/**
+ * Check record from LOB.
+ *
+ * @export
+ * @interface ICheck
+ */
+export interface ICheck {
+  id: string
+  description: string
+  metadata: {
+    invoiceID: string
+  }
+  check_number: number
+  memo?: string
+  amount: number
+  message?: null
+  url: string
+  to: IAddress
+  from: {
+    id: string
+    description: string
+  }
+  bank_account: {
+    id: string
+    description: string
+  },
+  thumbnails: IThumbnail[]
+  mail_type: string
+  send_date: Date
+  expected_delivery_date: Date
 }

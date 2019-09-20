@@ -1,6 +1,6 @@
 import 'isomorphic-fetch'
 import urlJoin from 'url-join'
-import { IAddress, IBankAccount, ISendCheckRequest, ISendCheckResponse } from '~common/interfaces'
+import { IAddress, IBankAccount, ICheck, ISendCheckRequest, ISendCheckResponse } from '~common/interfaces'
 
 const BASE_URL = 'https://api.lob.com/v1/'
 const { LOB_SECRET_KEY } = process.env
@@ -48,6 +48,38 @@ export default class LobService {
     })
       .then(res => res.json())
       .then<IBankAccount[]>(result => result.data)
+  }
+
+  /**
+   * Get a check by id.
+   *
+   * @param {string} id
+   * @returns {Promise<ICheck>}
+   * @memberof LobService
+   */
+  public async getCheck (id: string): Promise<ICheck> {
+    return fetch(urlJoin(BASE_URL, `checks/${id}`), {
+      headers: {
+        Authorization: `Basic ${this.authToken}`
+      }
+    })
+      .then<ICheck>(res => res.json())
+  }
+
+  /**
+   * Get a list of checks.
+   *
+   * @returns {Promise<ICheck[]>}
+   * @memberof LobService
+   */
+  public async getChecks (): Promise<ICheck[]> {
+    return fetch(urlJoin(BASE_URL, 'checks'), {
+      headers: {
+        Authorization: `Basic ${this.authToken}`
+      }
+    })
+      .then(res => res.json())
+      .then<ICheck[]>(result => result.data)
   }
 
   /**

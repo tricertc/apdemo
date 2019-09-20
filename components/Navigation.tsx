@@ -41,6 +41,7 @@ export default function Navigation () {
         <Nav className="mr-auto">
           <NavLink href="/dashboard" title="Dashboard" />
           <NavLink href="/invoices" title="Invoices" />
+          <NavLink href="/checks" title="Checks" />
           <NavLink href="/logout" title="Log out" />
         </Nav>
       </Navbar.Collapse>

@@ -15,11 +15,7 @@ export default function SelectedInvoice () {
   const invoice = state.selectedInvoice
 
   if (!invoice) {
-    return (
-      <Jumbotron className="text-center">
-        <h6>Select an invoice to pay</h6>
-      </Jumbotron>
-    )
+    return null
   }
 
   return (
